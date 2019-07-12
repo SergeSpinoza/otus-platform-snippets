@@ -14,7 +14,7 @@ spec:
   selector:
     matchExpressions:
       - {key: app, operator: In, values: [web]}
-  progressDeadlineSeconds: 60
+  progressDeadlineSeconds: &integer 60
   template:
     metadata:
       labels:
@@ -22,11 +22,11 @@ spec:
     spec:
       containers:
       - name: web
-        image: avtandilko/web:1.0
+        image: avtandilko/web:latest
         readinessProbe:
           httpGet:
             path: /ping.txt
-            port: 8000
+            port: &int 80
           initialDelaySeconds: 10
           periodSeconds: 3
         lifecycle:
@@ -57,4 +57,4 @@ spec:
     rollingUpdate:
       maxUnavailable: 0
       maxSurge: 1
-  replicas: 3
+  replicas: *int
