@@ -13,8 +13,8 @@ metadata:
 spec:
   selector:
     matchExpressions:
-      - {key: app, operator: In, values: [app, web]}
-  progressDeadlineSeconds: &integer 20
+      - {key: app, operator: In, values: [web]}
+  progressDeadlineSeconds: 60
   template:
     metadata:
       labels:
@@ -26,7 +26,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /ping.txt
-            port: &int 8000
+            port: 8000
           initialDelaySeconds: 10
           periodSeconds: 3
         lifecycle:
